@@ -17,7 +17,12 @@ app.get('/api/notes',function(req,res){
     
     //res.json()
 })
+app.post('/api/notes',function(req,res){
 
+    readAndAppend(req.body, './db/db.json');
+    
+    res.json(req.body)
+})
 
 // GET Route for homepage
 app.get('/', (req, res) =>
