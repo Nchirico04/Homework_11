@@ -1,5 +1,7 @@
 const express = require('express');
+
 const path = require('path');
+const { readAndAppend, readFromFile } = require('./helpers/fsUtils.js')
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -8,6 +10,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
+
+app.get('/api/notes',function(req,res){
+
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
+    
+    //res.json()
+})
+
 
 // GET Route for homepage
 app.get('/', (req, res) =>
